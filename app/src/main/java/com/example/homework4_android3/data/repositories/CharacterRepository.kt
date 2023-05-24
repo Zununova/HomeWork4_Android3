@@ -1,6 +1,5 @@
 package com.example.homework4_android3.data.repositories
 
-import androidx.lifecycle.MutableLiveData
 import com.example.homework4_android3.App
 import com.example.homework4_android3.models.CharacterModel
 import com.example.homework4_android3.models.RickAndMortyResponse
@@ -20,8 +19,9 @@ class CharacterRepository {
         onFailure: (errorMassage: String) -> Unit
     ) {
 
-        App.characterApi?.fetchCharacter(name, status, species,type,gender)
+        App.characterApi?.fetchCharacter(name, status, species, type, gender)
             ?.enqueue(object : Callback<RickAndMortyResponse<CharacterModel>> {
+
                 override fun onResponse(
                     call: Call<RickAndMortyResponse<CharacterModel>>,
                     response: Response<RickAndMortyResponse<CharacterModel>>
@@ -36,7 +36,6 @@ class CharacterRepository {
                     t: Throwable
                 ) {
                     onFailure(t.localizedMessage ?: "Error!")
-
                 }
             })
     }

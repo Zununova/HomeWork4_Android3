@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.homework4_android3.databinding.CharecterItemBinding
 import com.example.homework4_android3.models.CharacterModel
 
-class CharacterAdapter() :
+class CharacterAdapter :
     ListAdapter<CharacterModel, CharacterAdapter.ViewHolder>(DiffUtilCallback()) {
 
     inner class ViewHolder(private val binding: CharecterItemBinding) :

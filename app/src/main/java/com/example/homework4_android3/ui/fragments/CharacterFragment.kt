@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +17,6 @@ class CharacterFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterBinding
     private val characterAdapter = CharacterAdapter()
-
-
     private var viewModel: CharacterViewModel? = null
 
     override fun onCreateView(
@@ -32,8 +31,7 @@ class CharacterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
-        setUpListeners()
-        setUpRequest()
+        setUpListener()
         setUpObserves()
 
     }
@@ -45,14 +43,24 @@ class CharacterFragment : Fragment() {
         }
     }
 
+    private fun setUpListener() = with(binding) {
 
-    private fun setUpListeners() {
+        btnSearch.setOnClickListener {
+            viewModel?.fetchCharacter(
+                etName.text.toString(),
+                etStatus.text.toString(),
+                etSpecies.text.toString(),
+                etGender.text.toString(),
+                etType.text.toString()
+            )
+            btnShowLinerLayout.isVisible = true
+            linerLayout.isGone = true
+        }
 
-    }
-
-    private fun setUpRequest() {
-
-        viewModel?.fetchCharacter("rick", "alive", "", "male", "")
+        btnShowLinerLayout.setOnClickListener {
+            linerLayout.isVisible = true
+            btnShowLinerLayout.isGone = true
+        }
     }
 
     private fun setUpObserves() {
