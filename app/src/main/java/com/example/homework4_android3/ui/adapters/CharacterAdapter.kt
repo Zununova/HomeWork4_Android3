@@ -6,14 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.homework4_android3.data.models.CharacterModel
 import com.example.homework4_android3.databinding.CharecterItemBinding
-import com.example.homework4_android3.models.CharacterModel
 
-class CharacterAdapter :
+class CharacterAdapter(private val onClick: (id: Int) -> Unit) :
     ListAdapter<CharacterModel, CharacterAdapter.ViewHolder>(DiffUtilCallback()) {
 
     inner class ViewHolder(private val binding: CharecterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                val characterModel: CharacterModel = getItem(absoluteAdapterPosition)
+                onClick(characterModel.id)
+            }
+        }
 
         fun onBind(characterModel: CharacterModel?) {
             Glide.with(binding.imageViewHero).load(characterModel?.image)

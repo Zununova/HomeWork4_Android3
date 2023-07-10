@@ -1,5 +1,6 @@
-package com.example.homework4_android3.models
+package com.example.homework4_android3.data.models
 
+import android.location.Location
 import com.google.gson.annotations.SerializedName
 
 data class CharacterModel(
@@ -23,5 +24,10 @@ data class CharacterModel(
     val type: String,
 
     @SerializedName("gender")
-    val gender: String
+    val gender: String,
+
+    @SerializedName("location")
+    val location: LocationModel,
+
+
 )

@@ -1,6 +1,5 @@
-package com.example.homework4_android3.models
+package com.example.homework4_android3.data.models
 
-import android.icu.text.IDNA.Info
 import com.google.gson.annotations.SerializedName
 
 data class RickAndMortyResponse<T>(
